@@ -320,7 +320,7 @@ class Float(Raw):
     def format(self, value):
         try:
             return float(value)
-        except ValueError as ve:
+        except (TypeError, ValueError) as ve:
             raise MarshallingException(ve)
 
 

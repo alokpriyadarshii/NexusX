@@ -316,6 +316,10 @@ class FieldsTestCase(unittest.TestCase):
         field = fields.Float()
         self.assertRaises(MarshallingException, lambda: field.output("hey", {'hey': 'Explode!'}))
 
+    def test_float_type_error(self):
+        field = fields.Float()
+        self.assertRaises(MarshallingException, lambda: field.output("hey", {'hey': {}}))
+
     PI_STR = u'3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861'
     PI = Decimal(PI_STR)
 

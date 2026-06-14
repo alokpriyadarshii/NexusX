@@ -1,5 +1,5 @@
 from calendar import timegm
-from decimal import Decimal as MyDecimal, ROUND_HALF_EVEN
+from decimal import Decimal as MyDecimal, InvalidOperation, ROUND_HALF_EVEN
 from email.utils import formatdate
 import six
 try:
@@ -331,7 +331,10 @@ class Arbitrary(Raw):
     """
 
     def format(self, value):
-        return six.text_type(MyDecimal(value))
+        try:
+            return six.text_type(MyDecimal(value))
+        except (InvalidOperation, TypeError, ValueError) as ve:
+            raise MarshallingException(ve)
 
 
 class DateTime(Raw):
@@ -376,10 +379,13 @@ class Fixed(Raw):
         self.precision = MyDecimal('0.' + '0' * (decimals - 1) + '1')
 
     def format(self, value):
-        dvalue = MyDecimal(value)
-        if not dvalue.is_normal() and dvalue != ZERO:
-            raise MarshallingException('Invalid Fixed precision number.')
-        return six.text_type(dvalue.quantize(self.precision, rounding=ROUND_HALF_EVEN))
+        try:
+            dvalue = MyDecimal(value)
+            if not dvalue.is_normal() and dvalue != ZERO:
+                raise MarshallingException('Invalid Fixed precision number.')
+            return six.text_type(dvalue.quantize(self.precision, rounding=ROUND_HALF_EVEN))
+        except (InvalidOperation, TypeError, ValueError) as ve:
+            raise MarshallingException(ve)
 
 
 """Alias for :class:`~fields.Fixed`"""

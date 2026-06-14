@@ -327,6 +327,10 @@ class FieldsTestCase(unittest.TestCase):
         field = fields.Arbitrary()
         self.assertEqual(self.PI_STR, field.output("hey", {'hey': self.PI}))
 
+    def test_arbitrary_decode_error(self):
+        field = fields.Arbitrary()
+        self.assertRaises(MarshallingException, lambda: field.output("hey", {'hey': 'Explode!'}))
+
     def test_fixed(self):
         field5 = fields.Fixed(5)
         field4 = fields.Fixed(4)
@@ -353,6 +357,10 @@ class FieldsTestCase(unittest.TestCase):
     def test_fixed_with_attribute(self):
         field = fields.Fixed(4, attribute="bar")
         self.assertEqual('3.0000', field.output("foo", {'bar': '3'}))
+
+    def test_fixed_decode_error(self):
+        field = fields.Fixed()
+        self.assertRaises(MarshallingException, lambda: field.output("hey", {'hey': 'Explode!'}))
 
     def test_string(self):
         field = fields.String()

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NexusX dashboard</title>
+    <link rel="stylesheet" href="styles.css?v=20260614-10">
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="doc-nav" aria-label="API metrics sections">
+        <div class="doc-title">
+          <span class="doc-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M7 15l4-4 3 3 5-7"/></svg>
+          </span>
+          <span>API metrics</span>
+        </div>
+
+        <nav class="doc-groups" id="outerNav"></nav>
+      </aside>
+
+      <main class="stage">
+        <section class="copy-block" id="introCopy" aria-live="polite"></section>
+
+        <section class="product-frame" aria-label="NexusX dashboard">
+          <aside class="app-rail" aria-label="Product navigation">
+            <div class="brand">
+              <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path class="mark-glow" d="M20 53h24"/>
+                  <path class="mark-flask" d="M25 9h14M27 9v13L15.9 43.5C12.3 50.4 17.4 58 25.2 58h13.6c7.8 0 12.9-7.6 9.3-14.5L37 22V9"/>
+                  <path class="mark-liquid" d="M20.4 44.6h23.2c1.7 3.7-.9 7.4-4.9 7.4H25.3c-4 0-6.6-3.7-4.9-7.4z"/>
+                  <path class="mark-nexus" d="M25 42l7-16 7 16M28.2 35.2h7.6"/>
+                  <path class="mark-spark" d="M42.8 17.2l4-4M45.8 20.8h5.1M18.2 21.4l-3.3-3.3"/>
+                </svg>
+              </span>
+              <span>NexusX</span>
+            </div>
+            <nav class="app-nav" id="innerNav"></nav>
+            <div class="rail-footer">
+              <button class="rail-link" type="button" data-action="whats-new">
+                <span class="mini-icon sparkle" aria-hidden="true"></span>
+                <span>What's new</span>
+              </button>
+              <button class="rail-link" type="button" data-action="contact">
+                <span class="mini-icon chat" aria-hidden="true"></span>
+                <span>Get in touch</span>
+              </button>
+              <button class="rail-link" type="button" data-action="settings">
+                <span class="mini-icon gear" aria-hidden="true"></span>
+                <span>Settings</span>
+              </button>
+              <button class="profile" type="button" data-action="profile">
+                <span class="avatar" aria-hidden="true">SG</span>
+                <span>
+                  <strong>Alok Priyadarshi</strong>
+                  <small>alokpriyadarshi618</small>
+                </span>
+                <span class="chevron" aria-hidden="true">></span>
+              </button>
+            </div>
+          </aside>
+
+          <section class="app-panel">
+            <header class="topbar">
+              <div class="crumbs" id="crumbs"></div>
+              <div class="toolbar" id="toolbar"></div>
+            </header>
+            <div class="notice" id="notice" role="status" aria-live="polite"></div>
+            <div class="view" id="view"></div>
+          </section>
+        </section>
+
+        <section class="copy-block lower" id="detailCopy" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <div class="modal-layer" id="modalLayer" aria-hidden="true">
+      <div class="modal-scrim" data-close-modal></div>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-button close" type="button" data-close-modal aria-label="Close dialog">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <div id="modalContent"></div>
+      </section>
+    </div>
+
+    <template id="toastTemplate">
+      <div class="toast"></div>
+    </template>
+
+    <script src="app.js?v=20260614-10"></script>
+  </body>
+</html>

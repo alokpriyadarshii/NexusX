@@ -229,7 +229,7 @@ class Integer(Raw):
             if value is None:
                 return self.default
             return int(value)
-        except ValueError as ve:
+        except (TypeError, ValueError) as ve:
             raise MarshallingException(ve)
 
 

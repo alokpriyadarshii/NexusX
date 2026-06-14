@@ -304,6 +304,10 @@ class FieldsTestCase(unittest.TestCase):
         field = fields.Integer()
         self.assertRaises(MarshallingException, lambda: field.output("hey", {'hey': 'Explode please I am nowhere looking like an int'}))
 
+    def test_int_type_error(self):
+        field = fields.Integer()
+        self.assertRaises(MarshallingException, lambda: field.output("hey", {'hey': {}}))
+
     def test_float(self):
         field = fields.Float()
         self.assertEqual(3.0, field.output("hey", {'hey': 3.0}))

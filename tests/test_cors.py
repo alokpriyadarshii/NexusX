@@ -26,6 +26,22 @@ class CORSTestCase(unittest.TestCase):
             self.assertTrue('OPTIONS' in res.headers['Access-Control-Allow-Methods'])
             self.assertTrue('GET' in res.headers['Access-Control-Allow-Methods'])
 
+    def test_crossdomain_defaults_to_any_origin(self):
+
+        class Foo(flask_nexusx.Resource):
+            @cors.crossdomain()
+            def get(self):
+                return "data"
+
+        app = Flask(__name__)
+        api = flask_nexusx.Api(app)
+        api.add_resource(Foo, '/')
+
+        with app.test_client() as client:
+            res = client.get('/')
+            self.assertEqual(res.status_code, 200)
+            self.assertEqual(res.headers['Access-Control-Allow-Origin'], '*')
+
     def test_access_control_expose_headers(self):
 
         class Foo(flask_nexusx.Resource):

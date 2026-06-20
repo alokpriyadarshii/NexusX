@@ -1298,39 +1298,39 @@ body {
 }
 
 .brand {
-  min-height: 104px;
-  padding: 27px 20px 25px;
-  gap: 14px;
-  font-size: 27px;
+  min-height: 84px;
+  padding: 20px 18px 18px;
+  gap: 12px;
+  font-size: 24px;
   letter-spacing: 0;
   white-space: nowrap;
 }
 
 .brand-mark {
-  width: 52px;
-  height: 52px;
-  border-radius: 15px;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
 }
 
 .brand-mark svg {
-  width: 41px;
-  height: 41px;
+  width: 36px;
+  height: 36px;
 }
 
 .app-nav {
   flex: 0 0 auto;
-  gap: 4px;
-  padding: 8px 18px 0 12px;
+  gap: 2px;
+  padding: 4px 18px 0 12px;
 }
 
 .app-nav-button,
 .rail-link {
-  min-height: 52px;
-  grid-template-columns: 56px 1fr;
+  min-height: 42px;
+  grid-template-columns: 46px 1fr;
   border-radius: 8px;
-  padding: 0 26px;
+  padding: 0 22px;
   color: #666b72;
-  font-size: 27px;
+  font-size: 23px;
   font-weight: 750;
 }
 
@@ -1339,52 +1339,52 @@ body {
 }
 
 .mini-icon {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
 }
 
 .mini-icon svg {
-  width: 25px;
-  height: 25px;
+  width: 21px;
+  height: 21px;
 }
 
 .rail-footer {
   flex: 0 0 auto;
-  padding: 8px 18px 0 12px;
+  padding: 6px 18px 0 12px;
 }
 
 .rail-footer .rail-link {
-  min-height: 54px;
-  padding-left: 80px;
+  min-height: 42px;
+  padding-left: 68px;
   grid-template-columns: 0 1fr;
 }
 
 .profile {
   width: calc(100% + 30px);
-  min-height: 92px;
-  margin: 10px -18px 0 -12px;
-  grid-template-columns: 66px 1fr 26px;
-  gap: 12px;
-  padding: 16px 20px;
+  min-height: 78px;
+  margin: 8px -18px 0 -12px;
+  grid-template-columns: 56px 1fr 24px;
+  gap: 10px;
+  padding: 12px 18px;
 }
 
 .avatar {
-  width: 54px;
-  height: 54px;
-  font-size: 21px;
+  width: 46px;
+  height: 46px;
+  font-size: 18px;
 }
 
 .profile strong {
-  font-size: 22px;
+  font-size: 19px;
   line-height: 1.02;
 }
 
 .profile small {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .chevron {
-  font-size: 34px;
+  font-size: 30px;
 }
 
 .made {

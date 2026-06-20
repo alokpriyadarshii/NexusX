@@ -17,6 +17,7 @@
   --panel: #ffffff;
   --shadow: 0 28px 90px rgba(0, 0, 0, 0.36);
   --radius: 8px;
+  --dashboard-zoom: 0.9;
 }
 
 * {
@@ -403,6 +404,16 @@ button {
   justify-content: flex-end;
 }
 
+.zoom-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid #e0e3e6;
+  border-radius: 7px;
+  background: #fff;
+}
+
 .tool-button,
 .select-button,
 .primary-button,
@@ -468,6 +479,22 @@ button {
 .icon-button:focus-visible {
   border-color: #b9d6d4;
   outline: none;
+}
+
+.icon-button:disabled {
+  cursor: default;
+  opacity: 0.42;
+}
+
+.zoom-controls .icon-button {
+  border-color: transparent;
+  background: transparent;
+}
+
+.zoom-controls .icon-button:hover,
+.zoom-controls .icon-button:focus-visible {
+  border-color: #b9d6d4;
+  background: #f4fbfa;
 }
 
 .icon-button svg,
@@ -1248,17 +1275,21 @@ body {
 
 .stage {
   min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   padding: 0;
 }
 
 .product-frame {
-  width: 100vw;
-  height: 100vh;
+  width: calc(100vw / var(--dashboard-zoom));
+  height: calc(100vh / var(--dashboard-zoom));
   margin: 0;
   grid-template-columns: 344px minmax(0, 1fr);
   border: 0;
   border-radius: 0;
   box-shadow: none;
+  transform: scale(var(--dashboard-zoom));
+  transform-origin: top left;
 }
 
 .app-rail {
@@ -1385,6 +1416,13 @@ body {
   gap: 14px;
 }
 
+.zoom-controls {
+  gap: 6px;
+  padding: 5px;
+  border-radius: 12px;
+  border-width: 2px;
+}
+
 .select-button {
   min-height: 64px;
   border-radius: 9px;
@@ -1397,6 +1435,11 @@ body {
   width: 68px;
   height: 64px;
   border-radius: 9px;
+}
+
+.zoom-controls .icon-button {
+  width: 60px;
+  height: 56px;
 }
 
 .select-button svg,

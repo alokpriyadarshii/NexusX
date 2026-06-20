@@ -23,7 +23,9 @@ const icons = {
   plus: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
   chart: '<svg viewBox="0 0 24 24"><path d="M5 19V5M5 19h14M8 16v-4M12 16V8M16 16v-7"/></svg>',
   gear: '<svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 12h2M18 12h2M12 4v2M12 18v2"/></svg>',
-  eye: '<svg viewBox="0 0 24 24"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>'
+  eye: '<svg viewBox="0 0 24 24"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  zoomIn: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M16.5 16.5L21 21"/></svg>',
+  zoomOut: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M16.5 16.5L21 21"/></svg>'
 };
 
 const sections = [
@@ -171,7 +173,8 @@ const state = {
   overlayTraffic: false,
   expandedEnvs: false,
   modalTab: "Details",
-  currentModalData: null
+  currentModalData: null,
+  zoom: 0.9
 };
 
 const initialView = new URLSearchParams(window.location.search).get("view");
@@ -201,6 +204,7 @@ const copy = {
 function init() {
   renderOuterNav();
   renderInnerNav();
+  applyZoom();
   render();
   bindGlobalEvents();
 }
@@ -293,6 +297,12 @@ function renderToolbar() {
     <button class="select-button" type="button" data-action="period">${icons.clock}<span>${state.period}</span><span>v</span></button>
     ${!["overview", "uptime"].includes(state.view) ? `<button class="select-button" type="button" data-action="env">${icons.layers}<span>${state.env}</span><span>v</span></button>` : ""}
   `;
+  const zoomControls = `
+    <div class="zoom-controls" aria-label="Dashboard zoom controls">
+      <button class="icon-button" type="button" data-action="zoom-out" aria-label="Zoom out" title="Zoom out" ${state.zoom <= 0.75 ? "disabled" : ""}>${icons.zoomOut}</button>
+      <button class="icon-button" type="button" data-action="zoom-in" aria-label="Zoom in" title="Zoom in" ${state.zoom >= 1.1 ? "disabled" : ""}>${icons.zoomIn}</button>
+    </div>
+  `;
   let specific = "";
   if (state.view === "overview") {
     specific = `<button class="icon-button" type="button" data-action="refresh" aria-label="Refresh">${icons.refresh}</button><button class="primary-button" type="button" data-action="create-app">${icons.plus}<span>Create app</span></button>`;
@@ -307,7 +317,7 @@ function renderToolbar() {
   } else {
     specific = `<button class="icon-button teal" type="button" data-action="refresh" aria-label="Refresh">${icons.refresh}</button>`;
   }
-  document.getElementById("toolbar").innerHTML = common + specific;
+  document.getElementById("toolbar").innerHTML = common + specific + zoomControls;
 }
 
 function navigateToView(viewId) {
@@ -323,6 +333,18 @@ function resetViewScroll() {
   if (view) view.scrollTo({ top: 0, left: 0 });
   if (stage) stage.scrollTo({ top: 0, left: 0 });
   window.scrollTo({ top: 0, left: 0 });
+}
+
+function applyZoom() {
+  document.documentElement.style.setProperty("--dashboard-zoom", state.zoom.toFixed(2));
+}
+
+function adjustZoom(delta) {
+  const nextZoom = Math.max(0.75, Math.min(1.1, Number((state.zoom + delta).toFixed(2))));
+  if (nextZoom === state.zoom) return;
+  state.zoom = nextZoom;
+  applyZoom();
+  renderToolbar();
 }
 
 function handleAction(action, el) {
@@ -347,6 +369,14 @@ function handleAction(action, el) {
   if (action === "refresh") {
     showNotice(`Refreshed ${titleFor(state.view).toLowerCase()} at ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`);
     drawCharts(true);
+    return;
+  }
+  if (action === "zoom-out") {
+    adjustZoom(-0.05);
+    return;
+  }
+  if (action === "zoom-in") {
+    adjustZoom(0.05);
     return;
   }
   if (action === "filter") return openFilterModal();

@@ -310,11 +310,24 @@ function renderToolbar() {
   document.getElementById("toolbar").innerHTML = common + specific;
 }
 
+function navigateToView(viewId) {
+  state.view = viewId;
+  state.query = "";
+  render();
+  resetViewScroll();
+}
+
+function resetViewScroll() {
+  const view = document.getElementById("view");
+  const stage = document.querySelector(".stage");
+  if (view) view.scrollTo({ top: 0, left: 0 });
+  if (stage) stage.scrollTo({ top: 0, left: 0 });
+  window.scrollTo({ top: 0, left: 0 });
+}
+
 function handleAction(action, el) {
   if (action === "nav") {
-    state.view = el.dataset.view;
-    state.query = "";
-    render();
+    navigateToView(el.dataset.view);
     return;
   }
   if (action === "period") {
@@ -341,8 +354,7 @@ function handleAction(action, el) {
   if (action === "create-app") return openCreateAppModal();
   if (action === "edit-app") return openEditAppModal(el.dataset.app || "Boundless Bookstore API");
   if (action === "show-request-logs") {
-    state.view = "requestLogs";
-    render();
+    navigateToView("requestLogs");
     showNotice("Showing request logs for selected API");
     return;
   }

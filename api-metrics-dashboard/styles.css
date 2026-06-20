@@ -1716,6 +1716,52 @@ body {
   font-size: 142px;
 }
 
+@media (max-height: 700px) {
+  .brand {
+    min-height: 58px;
+    padding: 12px 16px 10px;
+    gap: 10px;
+    font-size: 19px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .brand-mark svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .app-nav {
+    gap: 0;
+    padding: 2px 12px 0 8px;
+  }
+
+  .app-nav-button {
+    min-height: 32px;
+    grid-template-columns: 34px 1fr;
+    padding: 0 16px;
+    font-size: 18px;
+  }
+
+  .mini-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mini-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .rail-footer {
+    display: none;
+  }
+}
+
 @media (max-width: 1100px) {
   .shell {
     display: block;

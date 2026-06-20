@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api-metrics-dashboard/index.html"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/api-metrics-dashboard/styles.css"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/api-metrics-dashboard/app.js"
+    }
+  ]
+}
